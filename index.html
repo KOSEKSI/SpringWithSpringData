@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jquery Example</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+	<style type="text/css">
+		select{
+			margin: 10px;
+		}
+		#generateReportMsgID{
+			color: red;
+			font-weight: bold;
+		}
+
+	</style>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<h5>Select an item to generate report</h5>
+	<select id="mainSelect">
+		<option selected="true" disabled>Select Option</option>
+		<option value="1">All</option>
+		<option value="2">LifERAY</option>
+	</select>
+	<br/>
+	<select id="typeOfReport">
+		<option selected="true" disabled>Select Type Of Report</option>
+		<option value="1">Monthly</option>
+		<option value="2">Quarterly</option>
+	</select>
+<br/><br/>
+<select id="reportYearId">
+		<option selected="true" disabled>Select Year</option>
+		
+	</select>
+<br/><br/>
+<select id="reportMonthId">
+		<option selected="true" disabled>Select Month</option>
+		
+	</select>
+			
+
+
+		</td>
+		<td>
+	<select id="mainSelectAll">
+		<option selected="true" disabled>Select Option</option>
+		<option value="1">All</option>
+		<option value="2">Jobber</option>
+	</select><br><br>
+<button id="generateReportId">Generate Report</button><br><br>
+<button id="exportReportId">Export Report</button>
+
+<span id="generateReportMsgID"> </span>
+		</td>
+
+	</tr>
+</table>
+	
+
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#typeOfReport").hide();
+			$("#reportYearId").hide();
+			$("#reportMonthId").hide();
+			$("#mainSelectAll").hide();
+			$("#generateReportId").hide();
+			$("#exportReportId").hide();
+
+
+$("#mainSelect").on('change', function (e) {
+	$("#typeOfReport").show();
+	$("#mainSelectAll").show().prop("disabled", true);
+	$("#generateReportId").show().prop("disabled", true);
+	$("#exportReportId").show().prop("disabled", true);
+   // var optionSelected = $("option:selected", this);
+    //var valueSelected = this.value;
+});
+
+$("#typeOfReport").on('change', function (e) {
+	
+
+
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+    if (valueSelected == 1) {
+    	$("#reportYearId").show();
+		$("#reportMonthId").show();
+    }
+    if (valueSelected == 2) {
+    	$("#reportYearId").hide();
+		$("#reportMonthId").hide();	
+    }
+});
+
+var currentYear = new Date().getFullYear();
+var currentMonth = new Date().getMonth();
+var cascadedDropDownMonthId = "#reportMonthId";
+
+//Adding Last 10 Years to Year Drop Down
+for (var i = currentYear;i > currentYear - 10 ; i--)
+{
+$("#reportYearId").append('<option value="'+ i.toString() +'">' +i.toString() +'</option>');
+}
+ 
+//Disabling Month Dropdown in case of invalid Selections.
+$(cascadedDropDownMonthId).prop("disabled", true);
+
+$("#reportYearId").change(function () {
+
+            var currentSelectedValue = $(this).val();
+            
+            if (currentSelectedValue == "-1")
+            {
+                $(cascadedDropDownMonthId).prop("disabled", true);
+            }
+            else
+            {
+                $(cascadedDropDownMonthId).prop("disabled", false);
+                //Get Current Year from Dropdown and Converting to Integer for performing math operations
+                var currentSelectedYear = parseInt($(this).val());
+               
+                //As Index of Javascript Month is from 0 to 11 therefore totalMonths are 11 NOT 12
+                var totalMonths = 11;
+                if (currentSelectedYear == currentYear) {
+                    totalMonths = currentMonth;
+                }
+                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                //Emptying the Month Dropdown to clear our last values
+                $(cascadedDropDownMonthId).empty();
+                
+                $(cascadedDropDownMonthId).append('<option value="-1">-Month-</option>');                                
+
+                //Appending Current Valid Months
+                for (var month = 0; month <= totalMonths; month++) {
+                    $(cascadedDropDownMonthId).append('<option value="'+ (month+1) +  '">' + monthNames[month] + '</option>');
+                }
+            }
+    });
+
+$("#mainSelect").on('change', function (e) {
+	$("#typeOfReport").show();
+   // var optionSelected = $("option:selected", this);
+    //var valueSelected = this.value;
+});
+$("#reportMonthId").on('change', function (e){
+var selYear = $("#reportYearId").children("option:selected").val();
+$("#generateReportMsgID").hide();
+if (selYear == currentYear) {
+$("#mainSelectAll").prop("disabled", false);
+$("#exportReportId").prop("disabled", false);	
+}else{
+	$("#mainSelectAll").show().prop("disabled", false);
+	$("#generateReportId").show().prop("disabled", false);
+	$("#exportReportId").prop("disabled", true);
+}
+});
+
+$("#generateReportId").on('click', function(e){
+$("#generateReportMsgID").show().html("<h4> Report Generated Successfully </h4>");
+});
+
+$("#exportReportId").on('click', function(e){
+$("#generateReportMsgID").show().html("<h4> Report Exported Successfully </h4>");
+});
+
+
+
+
+
+		});
+	</script>
+</body>
+</html>
