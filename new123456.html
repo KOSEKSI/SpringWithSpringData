@@ -1,0 +1,7 @@
+$("#wdorg").on('change', function (e) {
+	$("#Typeofreport").show();
+	$("#generateReportId").hide();
+    $("#exportReportId").hide();
+   var optionSelected = $("option:selected", this);
+   var valueSelected = this.value;
+});

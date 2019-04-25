@@ -1,0 +1,127 @@
+<%@page
+	import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Organization"%>
+<%@page import="java.util.List"%>
+<%@page import="com.aapa.billing.util.AapaBillingUtil"%>
+<%@page import="com.aapa.billing.constants.AapaBillingPortletKeys"%>
+<%@ include file="/init.jsp"%>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
+
+<html>
+<head>
+</head>
+<body>
+	<table align="left" cellpadding="10">
+		<tr>
+			<td>
+				<%
+					AapaBillingUtil aapaBillingUtil = new AapaBillingUtil();
+					aapaBillingUtil.fetchOrganization();
+					List<Organization> orgs = aapaBillingUtil.fetchOrganization();
+				%> <aui:select name="" id="wdorg">
+					<aui:option disabled="true" selected="true">Select WD Name</aui:option>
+					<aui:option value="0">ALL</aui:option>
+					<%
+						for (int index = 0; index < orgs.size(); index++) {
+								Organization organization = orgs.get(index);
+					%>
+
+					<aui:option value="<%=organization.getOrganizationId()%>"><%=organization.getName()%></aui:option>
+
+					<%
+						}
+					%>
+				</aui:select>
+			</td>
+		</tr>
+
+		<tr>
+			<td><aui:select class="aapabilling" name="" id="Typeofreport"
+					onchange="typeOfReportFunction(this.options[this.selectedIndex].value)"
+					cssClass="aapabilling" style="display:none;">
+					<aui:option value="-1" disabled="true" selected="true">Type Of Report</aui:option>
+					<aui:option value="1">monthly</aui:option>
+					<aui:option value="2">quarterly</aui:option>
+				</aui:select></td>
+			<td><aui:select class="aapabilling" name="" id="Typeoforg"
+					disabled="true" cssClass="Typeoforg" style="display:none;">
+					<aui:option value="-1">ALL</aui:option>
+					<aui:option value="1">JOBBER</aui:option>
+					<aui:option value="2">CSC</aui:option>
+				</aui:select></td>
+
+		</tr>
+		<tr>
+			<td><aui:select class="monthtype" name="" id="month_year"
+					cssClass="monthtypequartertype" style="display:none;">
+					<aui:option value="-1" disabled="true" selected="true">select year</aui:option>
+					<aui:option value="1">2012</aui:option>
+					<aui:option value="2">2013</aui:option>
+					<aui:option value="3">2014</aui:option>
+					<aui:option value="4">2015</aui:option>
+					<aui:option value="5">2016</aui:option>
+					<aui:option value="6">2017</aui:option>
+					<aui:option value="7">2018</aui:option>
+					<aui:option value="8">2019</aui:option>
+				</aui:select></td>
+			<td><aui:button name="" class="aapabilling"
+					id="aapabilling_generate" onclick="generate()" type="button"
+					value="Generate Report" cssClass="aapabilling1" style="display:none;" /></td>
+		</tr>
+		<tr>
+			<td><aui:select class="monthtype" id="selectmonth" name=""
+					onchange="monthTypeFunction(this.options[this.selectedIndex].value)"
+					cssClass="monthtype" style="display:none;">
+					<aui:option value="-1" disabled="true" selected="true">select month</aui:option>
+					<aui:option value="January">Jan</aui:option>
+					<aui:option value="February">Feb</aui:option>
+					<aui:option value="March">Mar</aui:option>
+					<aui:option value="April">Apr</aui:option>
+					<aui:option value="May">May</aui:option>
+					<aui:option value="June">Jun</aui:option>
+					<aui:option value="July">Jul</aui:option>
+					<aui:option value="August">Aug</aui:option>
+					<aui:option value="September">Sep</aui:option>
+					<aui:option value="October">Oct</aui:option>
+					<aui:option value="November">Nov</aui:option>
+					<aui:option value="December">Dec</aui:option>
+				</aui:select> <aui:select class="quartertype" id="quarter" name=""
+					onchange="quarterTypeFunction(this.options[this.selectedIndex].value)"
+					cssClass="quartertype" style="display:none;">
+					<aui:option value="-1" disabled="true" selected="true">select quarter</aui:option>
+					<aui:option value="1">Q1(jan,feb & mar)</aui:option>
+					<aui:option value="2">Q2(apr,may &jun)</aui:option>
+					<aui:option value="3">Q3(july,aug & sept)</aui:option>
+					<aui:option value="4">Q4(oct,nov & dec)</aui:option>
+				</aui:select></td>
+
+			<td><aui:button name="" id="aapabilling_export"
+					class="aapabilling" onclick="export()" type="button"
+					value="Export Report" cssClass="ExportReport" style="display:none;" /></td>
+		</tr>
+	</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

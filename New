@@ -1,0 +1,131 @@
+ <%
+                    						for (int i = 2000; i < 2019; i++) {
+
+                    					%>
+
+                    					<aui:option value="<%=i%>"><%=i%></aui:option>
+
+                    					<%
+                    						}
+                    					%>
+
+
+
+
+
+
+
+
+
+
+					<aui:option value="January">Jan</aui:option>
+					<aui:option value="February">Feb</aui:option>
+					<aui:option value="March">Mar</aui:option>
+					<aui:option value="April">Apr</aui:option>
+					<aui:option value="May">May</aui:option>
+					<aui:option value="June">Jun</aui:option>
+					<aui:option value="July">Jul</aui:option>
+					<aui:option value="August">Aug</aui:option>
+					<aui:option value="September">Sep</aui:option>
+					<aui:option value="October">Oct</aui:option>
+					<aui:option value="November">Nov</aui:option>
+					<aui:option value="December">Dec</aui:option>
+
+
+
+    function typeOfYear(id){
+                console.log(id);
+                var d=new date();
+                var year=d.getFullYear();
+                var month=d.getMonth();
+                var months=['jan','feb','march','april','may','june'
+                ,'july','Aug','sep','oct','nov','dec'];
+                console.log(year);
+                if(id==year)
+                {
+                    var i;
+                    for (i = 0; i < d.getMonth(); i++) {
+                      text += "<option value="+months[i]+">"+months[i]+"</option>";
+                    }
+                    document.getElementById("<portlet:namespace/>selectmonth").innerHTML = text;
+
+
+
+
+                }
+                else{
+
+
+                            var j;
+                                    for (j = 0; j < d.getMonth(); j++) {
+                                      text1 += "<option value="+months[j]+">"+months[j]+"</option>";
+                                    }
+                                    document.getElementById("<portlet:namespace/>selectmonth").innerHTML = text1;
+
+
+
+
+
+
+                }
+
+        }
+
+
+
+ <aui:option value="-1" disabled="true" selected="true">select month</aui:option>
+                                        <aui:option value="January">Jan</aui:option>
+                                        <aui:option value="February">Feb</aui:option>
+                                        <aui:option value="March">Mar</aui:option>
+                                        <aui:option value="April">Apr</aui:option>
+                                        <aui:option value="May">May</aui:option>
+                                        <aui:option value="June">Jun</aui:option>
+                                        <aui:option value="July">Jul</aui:option>
+                                        <aui:option value="August">Aug</aui:option>
+                                        <aui:option value="September">Sep</aui:option>
+                                        <aui:option value="October">Oct</aui:option>
+                                        <aui:option value="November">Nov</aui:option>
+                                        <aui:option value="December">Dec</aui:option>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%
+						for (int index = 0; index < orgs.size(); index++) {
+								Organization organization = orgs.get(index);
+					%>
+
+					<aui:option value="<%=organization.getOrganizationId()%>"><%=organization.getName()%></aui:option>
+
+					<%
+						}
+					%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

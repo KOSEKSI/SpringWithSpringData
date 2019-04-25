@@ -1,0 +1,62 @@
+
+    function wdOrgSelect() {
+    	$(".aapabilling").show();
+    	$(".aapabilling1").show();
+    	$(".Typeoforg").show();
+    	$(".ExportReport").show();
+    	$('.ExportReport').prop('disabled', true);
+    }
+    
+ function monthTypeFunction(id){
+    	var value=$(".monthtypequartertype").val();
+    			console.log(value);
+    			
+    	if(value==null)
+    	{
+    		console.log(id);
+    		$('.Typeoforg').prop('disabled', true);	
+    		$('.monthtype').val('-1');	
+    		
+    	}
+    	else	
+    		$('.Typeoforg').prop('disabled', false);		
+    			
+    			}
+    
+    function quarterTypeFunction(id){
+    	var value=$(".monthtypequartertype").val();
+    			console.log(value);
+    			
+    	if(value==null)
+    	{
+    		console.log(id);
+    		$('.Typeoforg').prop('disabled', true);	
+    		$('.quartertype').val('-1');
+    		
+    		}
+    	else	
+    		$('.Typeoforg').prop('disabled', false);		
+    			
+    			}
+    		
+    	
+    	function typeOfReportFunction(id){
+        	if(id==1)
+        		{
+        $(".monthtypequartertype").show();
+        $(".monthtype").show();
+        $(".quartertype").hide();
+        $('.monthtype').val('-1');
+        $('.monthtypequartertype').val('-1');
+        $('.Typeoforg').prop('disabled', true);
+        		}
+        	else if(id==2)
+        		{
+        		 $(".quartertype").show();	
+        		  $(".monthtypequartertype").show();
+        		 $(".monthtype").hide();
+        		 $('.quartertype').val('-1');
+        		 $('.monthtypequartertype').val('-1');
+        		 $('.Typeoforg').prop('disabled', true);
+        		}
+        	}
